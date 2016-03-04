@@ -3,8 +3,8 @@
 @author: Bob Stine
 
 First program, Data Mgmt & Visualization
+Display univariate distribution of several variables.
 """
-import math
 import pandas
 import numpy
  
@@ -27,15 +27,24 @@ def print_dist(data, index_str):
     return
      
 if __name__ == "__main__":
-
+    print("Display univariate distribution of several variables from GapMinder.")
+    
+    data = pandas.read_csv("gapminder.csv", low_memory=False)
     print("Rows/columns in gapminder.csv: ", len(data), "/", len(data.columns))
 
-
-    data = pandas.read_csv("gapminder.csv", low_memory=False)
-    conv_2_num(data, "alcconsumption")    
     
-    bins = numpy.linspace(0, data.alcconsumption.max(), 10)
-    groups = data.groupby(pandas.cut(data.alcconsumption, bins))
-    print("try count by bin:")
+    print("Count grouped by bin:")
+    
+    conv_2_num(data, "alcconsumption")    
+    bins = numpy.linspace(0.0, data["alcconsumption"].max(), 20)
+    groups = data.groupby(pandas.cut(data["alcconsumption"], bins))
     print(groups.count().alcconsumption)
+    print("")
+    
+    conv_2_num(data, "incomeperperson")
+    bins = numpy.linspace(0.0, data["incomeperperson"].max(), 20)
+    groups = data.groupby(pandas.cut(data["incomeperperson"], bins))
+    print(groups.count().incomeperperson)
+
+    
     print("done")
