@@ -26,17 +26,14 @@ def print_dist(data, index_str):
     return
      
 if __name__ == "__main__":
+
+    #print("Rows/columns in gapminder.csv: ", len(data), "/", len(data.columns))
+
+    #conv_2_num(data, "alcconsumption")
     data = pandas.read_csv("gapminder.csv", low_memory=False)
-
-    print("Rows/columns in gapminder.csv: ", len(data), "/", len(data.columns))
-
-    conv_2_num(data, "alcconsumption")
-    alc_data = data.alcconsumption
-    #alc_min = data.alcconsumption.min()
+    data["alcconsumption"] = data["alcconsumption"].convert_objects(convert_numeric = True)
     bins = numpy.linspace(data.alcconsumption.min(), data.alcconsumption.max(), 5)
-    groups = data.groupby(pandas.cut(alc_data, bins))
-    print("groups created:")
-    print(groups)
+    groups = data.groupby(pandas.cut(data.alcconsumption, bins))
     print("try count by bin:")
     print(groups.count().alcconsumption)
     print("done")
