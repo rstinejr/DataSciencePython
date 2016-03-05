@@ -34,21 +34,21 @@ if __name__ == "__main__":
 
     print("'alcconsumption' is annual per capita consumption of alcohol, in liters.")
     conv_2_num(data, "alcconsumption")    
-    bins = numpy.linspace(0.0, data["alcconsumption"].max(), 20)
+    bins = numpy.linspace(data["alcconsumption"].min(), data["alcconsumption"].max(), 20)
     groups = data.groupby(pandas.cut(data["alcconsumption"], bins))
     print(groups.count().alcconsumption)
     print("")
     
     print("'incomperperson' is per capita income.")
     conv_2_num(data, "incomeperperson")
-    bins = numpy.linspace(0.0, data["incomeperperson"].max(), 20)
+    bins = numpy.linspace(data["incomeperperson"].min(), data["incomeperperson"].max(), 20)
     groups = data.groupby(pandas.cut(data["incomeperperson"], bins))
     print(groups.count().incomeperperson)
     print("")
     
     print("'lifeexpectancy' is life expectancy at birth, in years.")
     conv_2_num(data, "lifeexpectancy")
-    bins = numpy.linspace(0.0, data["lifeexpectancy"].max(), 20)
+    bins = numpy.linspace(data["lifeexpectancy"].min(), data["lifeexpectancy"].max(), 20)
     groups = data.groupby(pandas.cut(data["lifeexpectancy"], bins))
     print(groups.count().lifeexpectancy)
     
