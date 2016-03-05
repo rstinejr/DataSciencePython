@@ -8,10 +8,18 @@ Display univariate distribution of several variables.
 import pandas
 import numpy
  
+"""
+   Convert missing data to numeric, to
+   avoid ugly results in the pandas and numpy 
+   functions.
+"""
 def conv_2_num(data, index_str):
     data[index_str] = data[index_str].convert_objects(convert_numeric = True)
     return
-    
+
+"""
+   Main routine.
+"""    
 if __name__ == "__main__":
     print("")    
     print("Display univariate distribution of several variables from GapMinder.")
