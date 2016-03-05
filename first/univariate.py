@@ -33,7 +33,9 @@ if __name__ == "__main__":
     print("Rows/columns in gapminder.csv: ", len(data), "/", len(data.columns))
 
     
-    print("Count grouped by bin:")
+    print("Frequency distributions by category")
+    print("Left-hand column shows range of an item's values.")
+    print("Right-hand column is number of observations in that range.")
     
     conv_2_num(data, "alcconsumption")    
     bins = numpy.linspace(0.0, data["alcconsumption"].max(), 20)
@@ -45,6 +47,11 @@ if __name__ == "__main__":
     bins = numpy.linspace(0.0, data["incomeperperson"].max(), 20)
     groups = data.groupby(pandas.cut(data["incomeperperson"], bins))
     print(groups.count().incomeperperson)
-
+    print("")
+    
+    conv_2_num(data, "lifeexpectancy")
+    bins = numpy.linspace(0.0, data["lifeexpectancy"].max(), 20)
+    groups = data.groupby(pandas.cut(data["lifeexpectancy"], bins))
+    print(groups.count().incomeperperson)
     
     print("done")
