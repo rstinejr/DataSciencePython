@@ -17,6 +17,12 @@ def conv_2_num(data, index_str):
     data[index_str] = data[index_str].convert_objects(convert_numeric = True)
     return
 
+def get_groups(data, index_str):
+    conv_2_num(data, index_str)    
+    bins = numpy.linspace(data[index_str].min(), data[index_str].max(), 20)
+    groups = data.groupby(pandas.cut(data[index_str], bins))
+    return groups
+    
 """
    Main routine.
 """    
@@ -33,23 +39,18 @@ if __name__ == "__main__":
     data = pandas.read_csv("gapminder.csv", low_memory=False)
 
     print("'alcconsumption' is annual per capita consumption of alcohol, in liters.")
-    conv_2_num(data, "alcconsumption")    
-    bins = numpy.linspace(data["alcconsumption"].min(), data["alcconsumption"].max(), 20)
-    groups = data.groupby(pandas.cut(data["alcconsumption"], bins))
+    groups = get_groups(data, "alcconsumption")
     print(groups.count().alcconsumption)
     print("")
     
     print("'incomperperson' is per capita income.")
-    conv_2_num(data, "incomeperperson")
-    bins = numpy.linspace(data["incomeperperson"].min(), data["incomeperperson"].max(), 20)
-    groups = data.groupby(pandas.cut(data["incomeperperson"], bins))
+    groups = get_groups(data, "incomeperperson")
     print(groups.count().incomeperperson)
     print("")
     
     print("'lifeexpectancy' is life expectancy at birth, in years.")
-    conv_2_num(data, "lifeexpectancy")
-    bins = numpy.linspace(data["lifeexpectancy"].min(), data["lifeexpectancy"].max(), 20)
-    groups = data.groupby(pandas.cut(data["lifeexpectancy"], bins))
+    groups = get_groups(data, "lifeexpectancy")
     print(groups.count().lifeexpectancy)
+    print("")
     
     print("done")
