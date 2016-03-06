@@ -14,7 +14,7 @@ import numpy
    functions.
 """
 def conv_2_num(data, index_str):
-    data[index_str] = data[index_str].convert_objects(convert_numeric = True)
+    data[index_str] = pandas.to_numeric(data[index_str], errors = 'coerce')
     return
 
 def get_groups(data, index_str):
