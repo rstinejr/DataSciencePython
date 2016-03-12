@@ -48,13 +48,13 @@ if __name__ == "__main__":
     
     data = pandas.read_csv("gapminder.csv", low_memory=False)
 
-    print("'alcconsumption' is annual per capita consumption of pure alcohol, in liters.")
     groups = get_groups(data, "alcconsumption")
-    
+
+    print("Annual per capita consumption of pure alcohol, in liters.")
+    print("   %-17s  count" % ("interval"))    
     for group in groups:
-        #print("type of group: ", type(group),"len: ",len(group))
-        #print("types of tuple elements: <", type(group[0]), ", ",type(group[1]),">")
-        print(group[0],"\t",group[1]["alcconsumption"].count())
+        #print(group[0],"\t",group[1]["alcconsumption"].count())
+        print("%-20s    %d" % (group[0],group[1]["alcconsumption"].count()))
     
     #print(groups.count().alcconsumption)
     print("")
