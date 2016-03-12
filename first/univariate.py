@@ -2,7 +2,7 @@
 """
 @author: Bob Stine
 
-First program, Data Mgmt & Visualization
+Data Mgmt & Visualization
 Display univariate distribution of several variables.
 """
 import pandas
@@ -22,6 +22,7 @@ def conv_2_num(data, index_str):
         convert the data to numeric and drop missing data.
         define 20 equally-sized intervals between the minimum and maximum value
         return the "groups" -- the data partitioned into these intervals.
+        
     The return value "groups" is an instance of pandas.core.groupby.DataFrameGroupBy.
     It is a list of pairs, in which the first item is a string that identifies
     the "bin" of the group, and the second item is a DataFrame of the
@@ -58,16 +59,15 @@ if __name__ == "__main__":
     data = pandas.read_csv("gapminder.csv", low_memory=False)
 
     groups = get_groups(data, "alcconsumption")
-    
     print("Frequency distribution of annual per capita consumption of pure alcohol, in liters.")
     print_groups(groups, "alcconsumption")
 
-    print("Frequency distribution of annual per capita income, in US$ from 2000")
     groups = get_groups(data, "incomeperperson")
+    print("Frequency distribution of annual per capita income, in US$ from 2000")
     print_groups(groups,"incomeperperson")
-    
-    print("Frequency distribution of life expectancy at birth, in years.")
+        
     groups = get_groups(data, "lifeexpectancy")
+    print("Frequency distribution of life expectancy at birth, in years.")
     print_groups(groups, "lifeexpectancy")
     
     print("done")
