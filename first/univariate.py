@@ -32,6 +32,17 @@ def get_groups(data, index_str):
     bins = numpy.linspace(data[index_str].min(), data[index_str].max(), 20)
     groups = data.groupby(pandas.cut(data[index_str], bins))
     return groups
+
+"""
+    Print frequency distribution of a variable withing a DataFrameGroupBy object.
+    "index_str" is the name of the variable for which we display counts
+    within intervals.
+"""
+def print_groups(groups, index_str):
+    print("   %-21s  count" % ("interval"))    
+    for group in groups:
+        print("%-24s    %d" % (group[0],group[1][index_str].count()))
+    print("")
     
 """
    Main routine.
@@ -42,31 +53,21 @@ if __name__ == "__main__":
     print("The GapMinder data set compares various statistics across some 213 countries.")
     print("")
     print("Frequency distributions by category")
-    print("Left-hand column shows range of an item's values.")
-    print("Right-hand column is number of observations in that range.")
     print("")
     
     data = pandas.read_csv("gapminder.csv", low_memory=False)
 
     groups = get_groups(data, "alcconsumption")
+    
+    print("Frequency distribution of annual per capita consumption of pure alcohol, in liters.")
+    print_groups(groups, "alcconsumption")
 
-    print("Annual per capita consumption of pure alcohol, in liters.")
-    print("   %-17s  count" % ("interval"))    
-    for group in groups:
-        #print(group[0],"\t",group[1]["alcconsumption"].count())
-        print("%-20s    %d" % (group[0],group[1]["alcconsumption"].count()))
-    
-    #print(groups.count().alcconsumption)
-    print("")
-    """ 
-    print("'incomperperson' is per capita income.")
+    print("Frequency distribution of annual per capita income, in US$ from 2000")
     groups = get_groups(data, "incomeperperson")
-    print(groups.count().incomeperperson)
-    print("")
+    print_groups(groups,"incomeperperson")
     
-    print("'lifeexpectancy' is life expectancy at birth, in years.")
+    print("Frequency distribution of life expectancy at birth, in years.")
     groups = get_groups(data, "lifeexpectancy")
-    print(groups.count().lifeexpectancy)
-    print("") 
-    """    
+    print_groups(groups, "lifeexpectancy")
+    
     print("done")
