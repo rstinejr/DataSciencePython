@@ -9,9 +9,8 @@ import pandas
 import numpy
  
 """
-   Convert missing data to numeric, to
-   avoid ugly results in the pandas and numpy 
-   functions.
+   Convert missing data to numeric, to avoid ugly results in the pandas 
+   and numpy functions. Drop "na" values.
 """
 def conv_2_num(data, index_str):
     data[index_str] = pandas.to_numeric(data[index_str], errors = 'coerce').dropna()
@@ -44,6 +43,7 @@ def print_groups(groups, index_str):
     for group in groups:
         print("%-24s    %d" % (group[0],group[1][index_str].count()))
     print("")
+    return
     
 """
    Main routine.
@@ -65,7 +65,13 @@ if __name__ == "__main__":
     groups = get_groups(data, "incomeperperson")
     print("Frequency distribution of annual per capita income, in US$ from 2000")
     print_groups(groups,"incomeperperson")
-        
+
+    data.loc[data.incomeperperson > 45000.0,'incomeperperson'] = 45000.00
+    groups = get_groups(data, "incomeperperson")
+    print("Frequency distribution of recoded annual per capita income")
+    print_groups(groups,"incomeperperson")
+   
+    
     groups = get_groups(data, "lifeexpectancy")
     print("Frequency distribution of life expectancy at birth, in years.")
     print_groups(groups, "lifeexpectancy")
