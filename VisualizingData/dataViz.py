@@ -51,4 +51,10 @@ if __name__ == "__main__":
     seaborn.distplot(df["incomeperperson"].dropna(), kde = False)
     plt.savefig("uni_incomeperperson.png", format = "png")
 
+    plt.figure(3)
+    plt.xlabel("Years")
+    plt.title("Life expectancy at birth")
+    seaborn.distplot(df["lifeexpectancy"].dropna(), kde = False)
+    plt.savefig("uni_lifeexpectancy.png", format = "png")
+    
     print("Done")
