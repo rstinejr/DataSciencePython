@@ -34,11 +34,14 @@ if __name__ == "__main__":
     print("Start week 4 program")
     init_pandas()
     df = pandas.read_csv("../gapminder.csv")
-    print("columns:")
-    print(df.columns.values)
     
     conv_2_num(df, "alcconsumption")
     conv_2_num(df, "incomeperperson")
     conv_2_num(df, "lifeexpectancy")
+
+    plt.xlabel("Liters of Alcohol") 
+    plt.title("Per capita alcohol consumption")
+    seaborn.distplot(df['alcconsumption'].dropna(), kde = False)
+    plt.savefig("uni_alcconsumption.png",format="png")
     
     print("Done")
