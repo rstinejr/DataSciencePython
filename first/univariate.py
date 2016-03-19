@@ -56,7 +56,7 @@ if __name__ == "__main__":
     print("Frequency distributions by category")
     print("")
     
-    data = pandas.read_csv("gapminder.csv", low_memory=False)
+    data = pandas.read_csv("../gapminder.csv", low_memory=False)
 
     groups = get_groups(data, "alcconsumption")
     print("Frequency distribution of annual per capita consumption of pure alcohol, in liters.")
