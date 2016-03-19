@@ -5,7 +5,6 @@ Week 4 Assignment, Data Management and Visualization
 @author: Bob Stine
 """
 import pandas
-import numpy
 import seaborn
 import matplotlib.pyplot as plt
 
@@ -24,7 +23,7 @@ def init_pandas():
     
 """
    Convert missing data to numeric, to avoid ugly results in the pandas 
-   and numpy functions. Drop "na" values.
+   and functions. Drop "na" values.
 """
 def conv_2_num(data, index_str):
     data[index_str] = pandas.to_numeric(data[index_str], errors = 'coerce').dropna()
@@ -54,21 +53,37 @@ if __name__ == "__main__":
     print(df["lifeexpectancy"].describe())
 
     plt.figure(1)
+    seaborn.distplot(df['alcconsumption'].dropna(), kde = False)
     plt.xlabel("Liters of Alcohol") 
     plt.title("Per capita alcohol consumption")
-    seaborn.distplot(df['alcconsumption'].dropna(), kde = False)
     plt.savefig("uni_alcconsumption.png",format="png")
     
     plt.figure(2)
+    seaborn.distplot(df["incomeperperson"].dropna(), kde = False)
     plt.xlabel("Income, US$")
     plt.title("Per capita income in US$ from 2000")
-    seaborn.distplot(df["incomeperperson"].dropna(), kde = False)
     plt.savefig("uni_incomeperperson.png", format = "png")
 
     plt.figure(3)
+    seaborn.distplot(df["lifeexpectancy"].dropna(), kde = False)
     plt.xlabel("Years")
     plt.title("Life expectancy at birth")
-    seaborn.distplot(df["lifeexpectancy"].dropna(), kde = False)
     plt.savefig("uni_lifeexpectancy.png", format = "png")
+    
+    plt.figure(4)
+    scat_inc_alc = seaborn.regplot(x = 'alcconsumption', y='incomeperperson', 
+                                   fit_reg = False, data=df)
+    plt.xlabel('Alcohol Consumption')
+    plt.ylabel('Per Capita Income')
+    plt.title('Scatterplot, alcohol consumption and per capita income')
+    plt.savefig('scat_alc_inc.png', format = 'png')
+
+
+    plt.figure(5)
+    scat_life_alc = seaborn.regplot(x = 'alcconsumption', y = 'lifeexpectancy',
+                                    fit_reg = False, data = df)  
+    plt.xlabel('Alcohol Consumption')
+    plt.title('Scatterplot, alcohol consumption and life expectancy')
+    plt.savefig('scat_alc_life.png', format = 'png')
     
     print("Done")
