@@ -39,9 +39,16 @@ if __name__ == "__main__":
     conv_2_num(df, "incomeperperson")
     conv_2_num(df, "lifeexpectancy")
 
+    plt.figure(1)
     plt.xlabel("Liters of Alcohol") 
     plt.title("Per capita alcohol consumption")
     seaborn.distplot(df['alcconsumption'].dropna(), kde = False)
     plt.savefig("uni_alcconsumption.png",format="png")
     
+    plt.figure(2)
+    plt.xlabel("Income, US$")
+    plt.title("Per capita income in US$ from 2000")
+    seaborn.distplot(df["incomeperperson"].dropna(), kde = False)
+    plt.savefig("uni_incomeperperson.png", format = "png")
+
     print("Done")
