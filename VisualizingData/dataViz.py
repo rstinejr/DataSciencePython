@@ -38,6 +38,20 @@ if __name__ == "__main__":
     conv_2_num(df, "alcconsumption")
     conv_2_num(df, "incomeperperson")
     conv_2_num(df, "lifeexpectancy")
+    
+    print("Statistical summary of per capita alcohol consumption across countries")
+    print("Quantity is liters/year of pure ethanol")
+    print(df["alcconsumption"].describe())
+    print("")
+    
+    print("Statistical summary of per capita income")
+    print("Quantity is US$, from year 2000")
+    print(df["incomeperperson"].describe())
+    print("")
+    
+    print("Statistical summary of life expectancy at birth")
+    print("Quantity is years")
+    print(df["lifeexpectancy"].describe())
 
     plt.figure(1)
     plt.xlabel("Liters of Alcohol") 
